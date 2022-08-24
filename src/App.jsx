@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer'
 import Home from './containers/Home/Home'
 import Login from './containers/User/Login/Login'
 import Signup from './containers/User/SignUp/Signup'
+import Profile from './containers/User/Profile/Profile'
 import './App.scss'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
