@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.scss'
+
+
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer'
 import Home from './containers/Home/Home'
+import Login from './containers/User/Login/Login'
+import './App.scss'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
