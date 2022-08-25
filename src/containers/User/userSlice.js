@@ -26,6 +26,12 @@ export const userSlice = createSlice({
                 succesMessage: 'You have been signed succesfully'
             }
         },
+        // profile: (state, action) => {
+        //     return{
+        //         ...state,
+        //         ...action.payload
+        //     }
+        // },
         logError: (state, action) => {
             return {
                 ...state,
@@ -39,7 +45,7 @@ export const userSlice = createSlice({
 export const loginUser = (body) => async (dispatch) => {
     try {
         const user = await axios.post("http://localhost:8000/api/login", body);
-        let decode = jwt(user.data.token);
+        var decode = jwt(user.data.token);
 
         if (user.status === 200) {
             dispatch(login({
@@ -53,7 +59,6 @@ export const loginUser = (body) => async (dispatch) => {
         console.log(error)
     }
 };
-
 export const signUpUser = (email, password, name, last_name, phone) => async (dispatch) => {
     try {
         const user =await axios.post("http://localhost:8000/api/register",
@@ -68,6 +73,15 @@ export const signUpUser = (email, password, name, last_name, phone) => async (di
         dispatch(logError(error));
     }
 }
+
+// export const profileUser = (body) => async (dispatch) => {
+//     try {
+//         const user =await axios.get("http://localhost:8000/api/profile",body);
+//         // console.log(user);
+//     } catch (error) {
+//         dispatch(logError(error));
+//     }
+// }
 
 export const logOutUser = (body) => async (dispatch) => {
     try {

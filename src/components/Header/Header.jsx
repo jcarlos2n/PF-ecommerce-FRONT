@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../containers/User/userSlice";
 import "./Header.scss";
+import axios from "axios";
 
 const Header = () => {
-
+    const dispatch = useDispatch();
     const dataUser = useSelector(userData);
+    const [user, setUser] = useState();
+
+    const data = {
+        headers: {"Authorization": `Bearer ${dataUser.token}`}
+    }
+
+    async function fetchUser(){
+        await axios.get("http://localhost:8000/api/profile", data)
+        .then(resp => {
+            setUser(resp.data);
+            console.log(resp.data)
+        }).catch(error => {});
+    }
+
+    // if (dataUser.token) {
+        
+    // }
 
     if (!dataUser?.token) {
         return (
@@ -31,7 +49,8 @@ const Header = () => {
                 </Container>
             </Navbar>
         );
-    }else{
+    }else{    
+        fetchUser();
         return (
             <Navbar collapseOnSelect className="headerWall text-white m-0 p-0" expand="md" variant="dark">
                 <Container fluid className="black">
@@ -44,8 +63,7 @@ const Header = () => {
                             <Nav.Link as={Link} to="/aboutus" className="text-white mx-2">About Us</Nav.Link>
                         </Nav>
                         <Nav>
-                            
-                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >Profile</Nav.Link>
+                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{user.name}</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
