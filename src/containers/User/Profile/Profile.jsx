@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from "react-router";
-import { logout } from "../userSlice";
+import { logout, logOutUser, userData } from "../userSlice";
 
 
 
 const Profile = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
-
+    const dataUser = useSelector(userData);
     const getOut = () => {
+
         dispatch(logout());
-        
+        dispatch(logOutUser({
+            token: dataUser.token
+        }));
 
         setTimeout(() => {
             navigate('/')

@@ -69,6 +69,14 @@ export const signUpUser = (email, password, name, last_name, phone) => async (di
     }
 }
 
+export const logOutUser = (body) => async (dispatch) => {
+    try {
+        const user = await axios.post("http://localhost:8000/api/logout", body);
+    } catch (error) {
+        dispatch(logError(error));
+    }
+}
+
 export const {login ,logout, signup, logError} = userSlice.actions;
 export const userData = (state) => state.user;
 export default userSlice.reducer;
