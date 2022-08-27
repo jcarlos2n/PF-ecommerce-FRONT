@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,21 +13,21 @@ const Header = () => {
     const dataUser = useSelector(userData);
     const [user, setUser] = useState();
 
-    const data = {
+    
+useEffect(() => {
+    const config = {
         headers: {"Authorization": `Bearer ${dataUser.token}`}
     }
-
     async function fetchUser(){
-        await axios.get("http://localhost:8000/api/profile", data)
+        await axios.get("http://localhost:8000/api/profile", config)
         .then(resp => {
             setUser(resp.data);
-            console.log(resp.data)
         }).catch(error => {});
-    }
-
-    // if (dataUser.token) {
         
-    // }
+    }
+    fetchUser();
+}, [])
+    
 
     if (!dataUser?.token) {
         return (
@@ -38,7 +38,7 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to="/" className="text-white mx-2">Home</Nav.Link>
-                            <Nav.Link as={Link} to="films" className="text-white mx-2">Products</Nav.Link>
+                            <Nav.Link as={Link} to="/products" className="text-white mx-2">Products</Nav.Link>
                             <Nav.Link as={Link} to="/aboutus" className="text-white mx-2">About Us</Nav.Link>
                         </Nav>
                         <Nav>
@@ -50,7 +50,6 @@ const Header = () => {
             </Navbar>
         );
     }else{    
-        fetchUser();
         return (
             <Navbar collapseOnSelect className="headerWall text-white m-0 p-0" expand="md" variant="dark">
                 <Container fluid className="black">
@@ -59,11 +58,11 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to="/" className="text-white mx-2">Home</Nav.Link>
-                            <Nav.Link as={Link} to="films" className="text-white mx-2">Products</Nav.Link>
+                            <Nav.Link as={Link} to="/products" className="text-white mx-2">Products</Nav.Link>
                             <Nav.Link as={Link} to="/aboutus" className="text-white mx-2">About Us</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{user.name}</Nav.Link>
+                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{user?.name}</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

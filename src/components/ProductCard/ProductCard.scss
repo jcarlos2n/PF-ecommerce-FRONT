@@ -1,0 +1,16 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.card{
+    width: 18em;
+    height: 30em;
+    background-color: aqua;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cardImg{
+        width: 16em;
+        height: 14em;
+    }
+}

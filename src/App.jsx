@@ -8,6 +8,7 @@ import Login from './containers/User/Login/Login'
 import Signup from './containers/User/SignUp/Signup'
 import Profile from './containers/User/Profile/Profile'
 import './App.scss'
+import Product from './containers/Products/Product'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/products' element={<Product/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/profile' element={<Profile/>}/>
