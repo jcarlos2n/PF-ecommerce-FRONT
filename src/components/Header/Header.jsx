@@ -13,10 +13,10 @@ const Header = () => {
     const dataUser = useSelector(userData);
     const [user, setUser] = useState();
 
-    
-useEffect(() => {
+
     const config = {
         headers: {"Authorization": `Bearer ${dataUser.token}`}
+        
     }
     async function fetchUser(){
         await axios.get("http://localhost:8000/api/profile", config)
@@ -25,7 +25,11 @@ useEffect(() => {
         }).catch(error => {});
         
     }
+    
+useEffect(() => {
+
     fetchUser();
+    
 }, [])
     
 
@@ -49,8 +53,10 @@ useEffect(() => {
                 </Container>
             </Navbar>
         );
-    }else{    
+    }else{ 
+        fetchUser();
         return (
+            
             <Navbar collapseOnSelect className="headerWall text-white m-0 p-0" expand="md" variant="dark">
                 <Container fluid className="black">
                     <Navbar.Brand as={Link} to="/">LOGO</Navbar.Brand>

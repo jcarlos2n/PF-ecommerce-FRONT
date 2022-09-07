@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { userData } from "../../containers/User/userSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 const ProductCard = props => {
   const dataUser = useSelector(userData);
@@ -22,8 +24,8 @@ const ProductCard = props => {
           <ListGroup.Item>Precio: {props.data.price}€/Kg</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Card.Link as={Link} to="/login" >Login</Card.Link>
+          <Card.Link as={Link} to="/signup">Sign Up</Card.Link>
         </Card.Body>
       </Card>
     );
