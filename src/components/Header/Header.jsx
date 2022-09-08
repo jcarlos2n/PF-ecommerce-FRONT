@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userData } from "../../containers/User/userSlice";
@@ -13,25 +14,22 @@ const Header = () => {
     const dataUser = useSelector(userData);
     const [user, setUser] = useState();
 
+    useEffect(() => {
+        const config = {
+            headers: { "Authorization": `Bearer ${dataUser.token}` }
 
-    
-    
-useEffect(() => {
-    const config = {
-        headers: {"Authorization": `Bearer ${dataUser.token}`}
-        
-    }
-    async function fetchUser(){
-        await axios.get("http://localhost:8000/api/profile", config)
-        .then(resp => {
-            setUser(resp.data);
-        }).catch(error => {});
-        
-    }
-    fetchUser();
-    
-},[dataUser.token])
-    
+        }
+        async function fetchUser() {
+            await axios.get("http://localhost:8000/api/profile", config)
+                .then(resp => {
+                    setUser(resp.data);
+                }).catch(error => { });
+
+        }
+        fetchUser();
+
+    }, [dataUser.token])
+
 
     if (!dataUser?.token) {
         return (
@@ -53,9 +51,9 @@ useEffect(() => {
                 </Container>
             </Navbar>
         );
-    }else{ 
+    } else {
         return (
-            
+
             <Navbar collapseOnSelect className="headerWall text-white m-0 p-0" expand="md" variant="dark">
                 <Container fluid className="black">
                     <Navbar.Brand as={Link} to="/">LOGO</Navbar.Brand>
@@ -67,6 +65,17 @@ useEffect(() => {
                             <Nav.Link as={Link} to="/aboutus" className="text-white mx-2">About Us</Nav.Link>
                         </Nav>
                         <Nav>
+                            <NavDropdown title="Cart"  className="text-white mx-2 titleDrop">
+                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">
+                                    Another action
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.4">
+                                    Purchase
+                                </NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{user?.name}</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
