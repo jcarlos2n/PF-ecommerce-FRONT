@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { logout, logOutUser, userData } from "../userSlice";
 
 
@@ -23,7 +24,8 @@ const Profile = () => {
 
     return(
         <div className="profileWall">
-            <input type="submit" onClick={getOut} />
+            <button type="submit" onClick={getOut}>Log Out</button>
+            <button type="submit" as={Link} to='/address'>add address</button>
         </div>
     )
 }

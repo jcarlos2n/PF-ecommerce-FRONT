@@ -14,6 +14,9 @@ const Header = () => {
     const [user, setUser] = useState();
 
 
+    
+    
+useEffect(() => {
     const config = {
         headers: {"Authorization": `Bearer ${dataUser.token}`}
         
@@ -25,12 +28,9 @@ const Header = () => {
         }).catch(error => {});
         
     }
-    
-useEffect(() => {
-
     fetchUser();
     
-}, [])
+},[dataUser.token])
     
 
     if (!dataUser?.token) {
@@ -54,7 +54,6 @@ useEffect(() => {
             </Navbar>
         );
     }else{ 
-        fetchUser();
         return (
             
             <Navbar collapseOnSelect className="headerWall text-white m-0 p-0" expand="md" variant="dark">
@@ -75,10 +74,6 @@ useEffect(() => {
             </Navbar>
         );
     }
-
-    
-
-
 }
 
 export default Header;
