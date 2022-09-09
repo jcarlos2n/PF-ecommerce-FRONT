@@ -27,12 +27,12 @@ export const userSlice = createSlice({
                 succesMessage: 'You have been signed succesfully'
             }
         },
-        // profile: (state, action) => {
-        //     return{
-        //         ...state,
-        //         ...action.payload
-        //     }
-        // },
+        profile: (state, action) => {
+            return{
+                ...state,
+                ...action.payload
+            }
+        },
         logError: (state, action) => {
             return {
                 ...state,
@@ -46,7 +46,7 @@ export const userSlice = createSlice({
 export const loginUser = (body) => async (dispatch) => {
     try {
         const user = await axios.post("http://localhost:8000/api/login", body);
-        let decode = jwt(user.data.token);
+        var decode = jwt(user.data.token);
 
         if (user.status === 200) {
             dispatch(login({
@@ -74,20 +74,21 @@ export const signUpUser = (email, password, name, last_name, phone) => async (di
     }
 }
 
-// export const profileUser = () => async (dispatch) => {
-//     const config = {
-//         headers: {"Authorization": `Bearer ${user.data.token}`}
-//     }
-//     try {
-//         const user =await axios.get("http://localhost:8000/api/profile",config)
-//         dispatch(profile({
-//             ...data
-//         }))
-//     } catch (error) {
-//         dispatch(logError(error));
-//     }
-// }
-
+export const profileUser = (token) => async (dispatch) => {
+    console.log('token', token)
+    const config = {
+        headers: {"Authorization": `Bearer ${token}`}
+    }
+    try {
+        const user =await axios.get("http://localhost:8000/api/profile",config)
+        console.log(user)
+        dispatch(profile({
+            ...user.data
+        }))
+    } catch (error) {
+        dispatch(logError(error));
+    }
+}
 export const logOutUser = (body) => async (dispatch) => {
     try {
         const user = await axios.post("http://localhost:8000/api/logout", body);
@@ -96,6 +97,6 @@ export const logOutUser = (body) => async (dispatch) => {
     }
 }
 
-export const {login ,logout, signup, logError} = userSlice.actions;
+export const {login ,logout, signup, profile, logError} = userSlice.actions;
 export const userData = (state) => state.user;
 export default userSlice.reducer;
