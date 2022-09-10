@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { logout, logOutUser, userData, profileUser } from "../userSlice";
+import { logout, logOutUser, userData, profileUser, profile } from "../userSlice";
 
 
 
@@ -12,8 +12,8 @@ const Profile = () => {
     const dataUser = useSelector(userData);
    
     useEffect(() => {
-        console.log(dataUser.token)
         dispatch(profileUser(dataUser.token))
+        console.log('aqui',dataUser)
     },[])
     const getOut = () => {
 

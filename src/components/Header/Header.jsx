@@ -5,28 +5,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../containers/User/userSlice";
+import { profileUser, userData } from "../../containers/User/userSlice";
 import "./Header.scss";
-import axios from "axios";
 
 const Header = () => {
     const dispatch = useDispatch();
     const dataUser = useSelector(userData);
-    const [user, setUser] = useState();
 
     useEffect(() => {
-        const config = {
-            headers: { "Authorization": `Bearer ${dataUser.token}` }
-
-        }
-        async function fetchUser() {
-            await axios.get("http://localhost:8000/api/profile", config)
-                .then(resp => {
-                    setUser(resp.data);
-                }).catch(error => { });
-
-        }
-        fetchUser();
+        dispatch(profileUser(dataUser.token))
 
     }, [dataUser.token])
 
@@ -76,7 +63,7 @@ const Header = () => {
                                     Purchase
                                 </NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{user?.name}</Nav.Link>
+                            <Nav.Link as={Link} to="/profile" className="text-white mx-2" >{dataUser.name}</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

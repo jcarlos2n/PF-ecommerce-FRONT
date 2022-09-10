@@ -75,13 +75,11 @@ export const signUpUser = (email, password, name, last_name, phone) => async (di
 }
 
 export const profileUser = (token) => async (dispatch) => {
-    console.log('token', token)
     const config = {
         headers: {"Authorization": `Bearer ${token}`}
     }
     try {
         const user =await axios.get("http://localhost:8000/api/profile",config)
-        console.log(user)
         dispatch(profile({
             ...user.data
         }))
