@@ -7,7 +7,12 @@ const Home = props => {
     return(
         <div className="homeWall">
             <div>
-                <h1>Donde comer lo mejor es lo normal</h1>
+                <h1 className="centerText">
+                    Recogemos el fruto del arbol,<br></br>
+                    y lo ponemos directamente en tu hogar, <br />
+                    por que tu familia y tu,<br />
+                     mereceis lo mejor.
+                </h1>
             </div>
         </div>
     )

@@ -1,13 +1,16 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 .headerWall{
-    background-color: pink;
+    background-color: rgb(84, 236, 104);
     height: 7vh;
+    padding: 0;
+    margin: 0;
 }
 .black {
-    background-color: pink;
+    background-color: rgb(84, 236, 104);
+    color: black;
 }
 #dropdown{
     background-color: yellow;
-    color: white;
+    color: black;
 }
