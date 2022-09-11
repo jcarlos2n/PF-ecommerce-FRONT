@@ -10,6 +10,7 @@ import Profile from './containers/User/Profile/Profile'
 import './App.scss'
 import Product from './containers/Products/Product'
 import Address from './containers/Address/Address'
+import AboutUs from './containers/AboutUs/AboutUs'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/products' element={<Product/>}/>
+          <Route path='/aboutus' element={<AboutUs/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/profile' element={<Profile/>}/>

@@ -1,0 +1,20 @@
+.aboutWall{
+    height: 77.1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://yaraurl.net/nvbe');
+    background-size: cover;
+
+    .text{
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.501);
+        padding: 0.5em;
+        border-radius: 1em;
+
+        .text1{
+            font-size: 1.4em;
+            font-weight: 400;
+        }
+    }
+}
