@@ -32,6 +32,7 @@ export const userSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+            
         },
         logError: (state, action) => {
             return {
@@ -82,6 +83,7 @@ export const profileUser = (token) => async (dispatch) => {
         const user =await axios.get("http://localhost:8000/api/profile",config)
         dispatch(profile({
             ...user.data
+            
         }))
     } catch (error) {
         dispatch(logError(error));

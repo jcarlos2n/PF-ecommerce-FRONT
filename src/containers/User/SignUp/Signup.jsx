@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { signUpUser, userData } from "../userSlice";
 import "./Signup.scss";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 const Signup = props => {
@@ -25,7 +27,7 @@ const Signup = props => {
         if (localStorage.getItem('token')) {
             navigate('/signup')
         }
-    },[]);
+    }, []);
 
     const handleInput = (event) => {
         setSignup({
@@ -47,29 +49,39 @@ const Signup = props => {
 
         dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
 
-        setTimeout(() =>{
+        setTimeout(() => {
             navigate('/')
         }, 1500)
     }
 
     return (
         <div className="signupWall">
-            <form onSubmit={userSignup}>
-                <div className="signupItem">
-                    <label>Name</label>
-                    <input onChange={handleInput} type="text"  name='name' />
-                    <label>Last name</label>
-                    <input onChange={handleInput} type="text"  name='last_name' />
-                    <label>Phone</label>
-                    <input onChange={handleInput} type="text"  name='phone' />
-                    <label>email</label>
-                    <input onChange={handleInput} type="text"  name='email' />
-                    <label>Password</label>
-                    <input onChange={handleInput} type="password"  name='password' />
+            <Form onSubmit={userSignup}>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control onChange={handleInput} type="text" placeholder="Name" name="name" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control onChange={handleInput} type="text" placeholder="Last name" name="last_name" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control onChange={handleInput} type="text" placeholder="Phone" name="phone" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control onChange={handleInput} type="email" placeholder="Email" name="email" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control onChange={handleInput} type="password" placeholder="Password" name="password" />
+                </Form.Group>
 
-                    <button className="submitSignupItem" type="submit">Sign Up</button>
-                </div>
-            </form>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         </div>
     )
 }

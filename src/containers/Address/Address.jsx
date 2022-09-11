@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Address.scss";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { userData } from "../../containers/User/userSlice";
+import { profileUser, userData } from "../../containers/User/userSlice";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -12,25 +12,22 @@ const Address = () => {
     let navigate = useNavigate()
     const dataUser = useSelector(userData)
 
-    const [user, setUser] = useState();
-
     useEffect(() => {
-        const config = {
-            headers: { "Authorization": `Bearer ${dataUser.token}` }
-
-        }
-        async function fetchUser() {
-            await axios.get("http://localhost:8000/api/profile", config)
-                .then(resp => {
-                    setUser(resp.data);
-                }).catch(error => { });
-
-        }
-        fetchUser();
-
+        dispatch(profileUser(dataUser.token))
     }, [dataUser.token])
 
-    const addAddress = (street, city, state, postal_code, country) => async (dispatch) => {
+    const [address, setAddress] = useState({
+        street: '',
+        city: '',
+        state: '',
+        postal_code: '',
+        country: '',
+        user_id: dataUser.id
+    });
+
+    
+
+    const addAddress = (street, city, state, postal_code, country, user_id) => async (dispatch) => {
         try {
             const address = await axios.post('http://localhost:8000/api/user/address/add',
                 {
@@ -39,39 +36,57 @@ const Address = () => {
                     state: state,
                     postal_code: postal_code,
                     country: country,
-                    user_id: user.id
-                }
-            )
+                    user_id: user_id
+                })
+                dispatch(address(data))
         } catch (error) {
-
+            dispatch(logError(error));
         }
     }
 
     const handleInput = (e) => {
-        
+        setAddress({
+            ...address,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const addressAdd = () => {
+       console.log('entro');
+
+       setAddress({
+        ...address
+       })
+
+       dispatch(addAddress(address.street, address.city, address.state, address.postal_code, address.country, address.user_id))
+
+       setTimeout(() => {
+        navigate('/home')
+       },1000)
+
     }
 
     return (
-        <Form>
+        <Form onSubmit={addressAdd}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Street</Form.Label>
-                <Form.Control type="text" placeholder="Street" />
+                <Form.Control onChange={handleInput} type="text" placeholder="Street" name="street"/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="City" />
+                <Form.Control onChange={handleInput} type="text" placeholder="City" name="city"/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>State</Form.Label>
-                <Form.Control type="text" placeholder="State" />
+                <Form.Control onChange={handleInput} type="text" placeholder="State" name="state"/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Postal Code</Form.Label>
-                <Form.Control type="text" placeholder="Postal Code" />
+                <Form.Control onChange={handleInput} type="text" placeholder="Postal Code" name="postal_code"/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Country</Form.Label>
-                <Form.Control type="text" placeholder="Country" />
+                <Form.Control onChange={handleInput} type="text" placeholder="Country" name="country"/>
             </Form.Group>
 
             <Button variant="primary" type="submit">
