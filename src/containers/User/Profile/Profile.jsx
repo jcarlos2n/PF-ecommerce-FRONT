@@ -12,7 +12,12 @@ const Profile = () => {
     const dataUser = useSelector(userData);
    
     useEffect(() => {
-        dispatch(profileUser(dataUser.token))
+        if (!dataUser?.token) {
+            navigate('/');
+        }else{
+            dispatch(profileUser(dataUser.token))
+        }
+        
     },[])
     const getOut = () => {
 

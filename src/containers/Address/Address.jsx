@@ -13,7 +13,13 @@ const Address = () => {
     const dataUser = useSelector(userData)
 
     useEffect(() => {
-        dispatch(profileUser(dataUser.token))
+        if (!dataUser?.token) {
+            navigate('/');
+        }else{
+
+            dispatch(profileUser(dataUser.token));
+
+        }
     }, [dataUser.token])
 
     const [address, setAddress] = useState({
