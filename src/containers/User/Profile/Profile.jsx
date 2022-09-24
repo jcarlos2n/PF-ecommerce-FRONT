@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { logout, logOutUser, userData, profileUser, profile } from "../userSlice";
+import { logout, logOutUser, userData, profileUser} from "../userSlice";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.scss';
+import AddressCard from "../../../components/AddressCard/AddressCard";
 
 
 
@@ -30,7 +31,8 @@ const Profile = () => {
                     }
                     await axios.get('http://localhost:8000/api/user/address/get', config)
                         .then(resp => {
-                            setAddress(resp.data);
+                            setAddress(resp.data.data);
+                   
                         })
                 } catch (error) {
                     console.log(error)
@@ -59,14 +61,30 @@ const Profile = () => {
     }
 
     const AddressList = () => {
+        console.log(dataAdd)
         if (dataAdd.length > 0) {
             return (
                 <Container fluid>
                     <Row>
-                        <Col>1 of 1</Col>
+                        {/* <Col> */}
+                            {
+                                dataAdd.map((add, index) => (
+                                    <AddressCard key={index} data={add} />
+                                ))
+                            }
+                        {/* </Col> */}
                     </Row>
                 </Container>
             )
+        } else {
+            return (
+                <Container fluid>
+                    <Row>
+                        <Col>No hay direcciones</Col>
+                    </Row>
+                </Container>
+            )
+
         }
     }
 
@@ -74,6 +92,8 @@ const Profile = () => {
         <div className="profileWall">
             <button type="submit" onClick={getOut}>Log Out</button>
             <button type="submit" onClick={address}>add address</button>
+
+            <AddressList />
         </div>
     )
 }
