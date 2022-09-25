@@ -69,7 +69,7 @@ const Address = () => {
         dispatch(addAddress(address.street, address.city, address.state, address.postal_code, address.country))
 
            setTimeout(() => {
-            navigate('/home')
+            navigate('/')
            },1000)
 
     }
