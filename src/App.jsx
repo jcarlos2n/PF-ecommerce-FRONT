@@ -11,7 +11,7 @@ import './App.scss'
 import Product from './containers/Products/Product'
 import Address from './containers/Address/Address'
 import AboutUs from './containers/AboutUs/AboutUs'
-import UpdateAddress from './containers/UpdateAddress/UpdateAddress'
+
 
 function App() {
 
@@ -28,7 +28,6 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/address' element={<Address/>}/>
-          <Route path='/updateaddress' element={<UpdateAddress/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

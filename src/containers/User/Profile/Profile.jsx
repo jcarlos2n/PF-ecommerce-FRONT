@@ -9,18 +9,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.scss';
 import AddressCard from "../../../components/AddressCard/AddressCard";
-import UpdateAddressCard from "../../../components/UpdateAddressCard/UpdateAddressCard";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-// import UpdateAddress from "../../UpdateAddress/UpdateAddress";
-
-
 
 const Profile = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const dataUser = useSelector(userData);
     const [dataAdd, setAddress] = useState([]);
+    const [role, setRole] = useState([]);
 
     useEffect(() => {
         if (!dataUser?.token) {
@@ -44,7 +39,22 @@ const Profile = () => {
 
 
             }
+
+            async function fetchRole(){
+                try {
+                    const config = {
+                        headers: { "Authorization": `Bearer ${dataUser.token}` }
+                    }
+                    await axios.get('http://localhost:8000/api/user/getrole', config)
+                        .then(resp => {
+                            setRole(resp.data.data);
+                        })
+                } catch (error) {
+                    console.log(error)
+                }
+            }
             fetchAddress();
+            fetchRole();
         }
 
     }, [])
@@ -65,7 +75,7 @@ const Profile = () => {
     }
 
     const AddressList = () => {
-        console.log(dataAdd)
+        
         if (dataAdd.length > 0) {
             return (
                 <Container fluid>
@@ -92,50 +102,28 @@ const Profile = () => {
         }
     }
 
-    // const [addUp, setAdd] = useState({
-    //     details: false,
-    //     data: ''
-    // });
-
-    // const showAddress = (event, add) => {
-    //     setAdd({
-    //         ...addUp,
-    //         details: true,
-    //         data: pokemon
-    //     })
-    // }
-
-    // const hideAddress = (event) => {
-    //     setAdd({
-    //         ...addUp,
-    //         details: false,
-    //         data: ""
-    //     })
-    // }
-
-    // const UpdateAddress = () => {
-    //     if (dataAdd !== "") {
-    //         return (
-    //             <div className='detailedAdd'>
-    //                 <div ><p onClick={hideAddress} className='close'>X</p></div>
-    //                 <UpdateAddressCard data={dataAdd} />
-    //             </div>
-    //         )
-    //     } else {
-    //         return (
-    //             <div></div>
-    //         )
-    //     }
-    // }
-
+  if (role[0].role_id == 3) {
+    return(
+       
+        <div className="profileWall">
+             <h1>Eres admin</h1>
+            <button type="submit" onClick={getOut}>Log Out</button>
+            <button type="submit" onClick={address}>add address</button>
+      
+            <AddressList />
+        </div>
+    )
+  }else{
     return (
         <div className="profileWall">
             <button type="submit" onClick={getOut}>Log Out</button>
             <button type="submit" onClick={address}>add address</button>
-            {/* <UpdateAddress /> */}
+          
             <AddressList />
         </div>
     )
+  }
+    
 }
 
 export default Profile
