@@ -40,7 +40,7 @@ const Profile = () => {
 
             }
 
-            async function fetchRole(){
+            async function fetchRole() {
                 try {
                     const config = {
                         headers: { "Authorization": `Bearer ${dataUser.token}` }
@@ -75,7 +75,7 @@ const Profile = () => {
     }
 
     const AddressList = () => {
-        
+
         if (dataAdd.length > 0) {
             return (
                 <Container fluid>
@@ -83,7 +83,7 @@ const Profile = () => {
 
                         {
                             dataAdd.map((add, index) => (
-                                    <AddressCard key={index} data={add} />
+                                <AddressCard key={index} data={add} />
                             ))
                         }
 
@@ -102,28 +102,30 @@ const Profile = () => {
         }
     }
 
-  if (role[0].role_id == 3) {
-    return(
-       
-        <div className="profileWall">
-             <h1>Eres admin</h1>
-            <button type="submit" onClick={getOut}>Log Out</button>
-            <button type="submit" onClick={address}>add address</button>
-      
-            <AddressList />
-        </div>
-    )
-  }else{
-    return (
-        <div className="profileWall">
-            <button type="submit" onClick={getOut}>Log Out</button>
-            <button type="submit" onClick={address}>add address</button>
-          
-            <AddressList />
-        </div>
-    )
-  }
-    
+    if (role == '') {
+        return (
+            <div className="profileWall">
+                <button type="submit" onClick={getOut}>Log Out</button>
+                <button type="submit" onClick={address}>add address</button>
+
+                <AddressList />
+            </div>
+        )
+    } else if (role[0].role_id == 3) {
+
+        return (
+            <div className="profileWall">
+                <h1>Eres admin</h1>
+                <button type="submit" onClick={getOut}>Log Out</button>
+                <button type="submit" onClick={address}>add address</button>
+
+                <AddressList />
+            </div>
+        )
+    } {
+
+    }
+
 }
 
 export default Profile
