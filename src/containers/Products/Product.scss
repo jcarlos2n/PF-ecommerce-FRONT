@@ -3,9 +3,11 @@
 .productWall {
     width: 100vw;
     height: 78vh;
+    max-height: auto;
     background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
 }
