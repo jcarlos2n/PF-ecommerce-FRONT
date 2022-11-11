@@ -37,14 +37,14 @@ const ProductCard = props => {
         <Card.Body>
         <Card.Title>{props.data.variety}</Card.Title>
         </Card.Body>
-        <ListGroup className="list-group-flush">
+        <ListGroup className="list-group-flush infoCard">
           <ListGroup.Item>{props.data.description}</ListGroup.Item>
           <ListGroup.Item>Precio: {props.data.price}€/Kg</ListGroup.Item>
         </ListGroup>
         <Card.Body>
           <div>
             <label>Kg:</label>
-            <input type="text"   name='cuantity' />
+            <input type="text"   name='cuantity' className='boxCuantity'/>
           </div>
           <Card.Link href="#">Order</Card.Link>
         </Card.Body>
