@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.scss';
 import AddressCard from "../../../components/AddressCard/AddressCard";
+import Button from 'react-bootstrap/Button';
+
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -116,8 +118,10 @@ const Profile = () => {
         return (
             <div className="profileWall">
                 <h1>Eres admin</h1>
-                <button type="submit" onClick={getOut}>Log Out</button>
-                <button type="submit" onClick={address}>add address</button>
+                {/* <button  >Log Out</button> */}
+                <Button variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
+                <Button variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
+                {/* <button type="submit" >add address</button> */}
 
                 <AddressList />
             </div>
