@@ -19,7 +19,7 @@ const ProductCard = props => {
         <Card.Body>
         <Card.Title>{props.data.variety}</Card.Title>
         </Card.Body>
-        <ListGroup className="list-group-flush">
+        <ListGroup className="list-group-flush info">
           <ListGroup.Item>{props.data.description}</ListGroup.Item>
           <ListGroup.Item>Precio: {props.data.price}€/Kg</ListGroup.Item>
         </ListGroup>

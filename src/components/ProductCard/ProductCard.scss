@@ -3,7 +3,7 @@
 .card{
     width: 18em;
     height: 30em;
-    background-color: aqua;
+    background-color: rgb(189, 193, 193);
     padding: 0.5em;
     display: flex;
     align-items: center;
@@ -13,5 +13,9 @@
     .cardImg{
         width: 16em;
         height: 14em;
+    }
+
+    .info{
+        border-radius: 0.4em;
     }
 }
