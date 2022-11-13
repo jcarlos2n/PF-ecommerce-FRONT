@@ -38,27 +38,38 @@ const Signup = props => {
 
     const userSignup = (event) => {
         event.preventDefault()
-        
+
 
         if (signup.name == '') {
             setSignup({
                 ...signup,
                 isError: true,
-                errorMessage:'Inserte un nombre válido'
+                errorMessage: 'Inserte un nombre válido'
             });
-        }else{
+            return
+        }
+
+        if (signup.password.length < 6) {
             setSignup({
                 ...signup,
-                isError: false,
-                errorMessage: ''
+                isError: true,
+                errorMessage: 'Itroduce una contraseña valida'
             });
-    
-            dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
-    
-            setTimeout(() => {
-                navigate('/')
-            }, 1500)
+            return
         }
+
+        setSignup({
+            ...signup,
+            isError: false,
+            errorMessage: ''
+        });
+
+        dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
+
+        setTimeout(() => {
+            navigate('/')
+        }, 1500)
+
 
     }
 
