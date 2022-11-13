@@ -38,20 +38,28 @@ const Signup = props => {
 
     const userSignup = (event) => {
         event.preventDefault()
-        console.log('entro');
+        
 
+        if (signup.name == '') {
+            setSignup({
+                ...signup,
+                isError: true,
+                errorMessage:'Inserte un nombre válido'
+            });
+        }else{
+            setSignup({
+                ...signup,
+                isError: false,
+                errorMessage: ''
+            });
+    
+            dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
+    
+            setTimeout(() => {
+                navigate('/')
+            }, 1500)
+        }
 
-        setSignup({
-            ...signup,
-            isError: false,
-            errorMessage: ''
-        });
-
-        dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
-
-        setTimeout(() => {
-            navigate('/')
-        }, 1500)
     }
 
     return (
@@ -81,6 +89,7 @@ const Signup = props => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <p>{signup.errorMessage}</p>
             </Form>
         </div>
     )
