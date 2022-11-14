@@ -101,7 +101,7 @@ const Profile = () => {
 
         if (users.length > 0) {
             return (
-                <Container fluid>
+                <Container fluid className="cards">
                     <Row>
 
                         {
@@ -115,7 +115,7 @@ const Profile = () => {
             )
         } else {
             return (
-                <Container fluid>
+                <Container fluid className="cards">
                     <Row>
                         <Col>No hay direcciones</Col>
                     </Row>
@@ -129,7 +129,7 @@ const Profile = () => {
 
         if (dataAdd.length > 0) {
             return (
-                <Container fluid>
+                <Container fluid className="cards">
                     <Row>
 
                         {
@@ -143,7 +143,7 @@ const Profile = () => {
             )
         } else {
             return (
-                <Container fluid>
+                <Container fluid className="cards">
                     <Row>
                         <Col>No hay direcciones</Col>
                     </Row>
