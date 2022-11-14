@@ -177,10 +177,7 @@ const Profile = () => {
                 <UserList />
             </div>
         )
-    } {
-
-    }
-
+    } 
 }
 
 export default Profile
