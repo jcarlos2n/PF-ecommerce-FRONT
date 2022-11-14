@@ -21,7 +21,7 @@ const Profile = () => {
     const [role, setRole] = useState([]);
     const [users, setUsers] = useState([]);
 
-    
+
 
     useEffect(() => {
         if (!dataUser?.token) {
@@ -60,7 +60,7 @@ const Profile = () => {
                 }
             }
 
-            async function fetchUsers (){
+            async function fetchUsers() {
                 try {
                     const config = {
                         headers: { "Authorization": `Bearer ${dataUser.token}` }
@@ -76,7 +76,7 @@ const Profile = () => {
 
             fetchAddress();
             fetchRole();
-            fetchUsers();  
+            fetchUsers();
         }
 
     }, []);
@@ -98,7 +98,7 @@ const Profile = () => {
     }
 
     const UserList = () => {
-        console.log("Usuarios"+users)
+
         if (users.length > 0) {
             return (
                 <Container fluid>
@@ -124,7 +124,7 @@ const Profile = () => {
 
         }
     }
- 
+
     const AddressList = () => {
 
         if (dataAdd.length > 0) {
@@ -156,8 +156,10 @@ const Profile = () => {
     if (role == '') {
         return (
             <div className="profileWall">
-                <button type="submit" onClick={getOut}>Log Out</button>
-                <button type="submit" onClick={address}>add address</button>
+                <div className="buttons">
+                    <Button className="button" variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
+                    <Button className="button" variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
+                </div>
 
                 <AddressList />
             </div>
@@ -167,8 +169,11 @@ const Profile = () => {
         return (
             <div className="profileWall">
                 <h1>Eres admin</h1>
-                <Button variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
-                <Button variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
+                <div className="buttons">
+                    <Button className="button" variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
+                    <Button className="button" variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
+                </div>
+
 
                 <AddressList />
 
@@ -177,7 +182,7 @@ const Profile = () => {
                 <UserList />
             </div>
         )
-    } 
+    }
 }
 
 export default Profile
