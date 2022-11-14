@@ -6,6 +6,7 @@ import { signUpUser, userData } from "../userSlice";
 import "./Signup.scss";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import evalField from "../../../utils";
 
 
 const Signup = props => {
@@ -39,8 +40,16 @@ const Signup = props => {
     const userSignup = (event) => {
         event.preventDefault()
 
+        if (signup.name == '' || signup.last_name == '' || signup.email == '' || signup.address == '' || signup.phone == '') {
+            setSignup({
+                ...signup,
+                isError: true,
+                errorMessage: 'Rellene todos los campos'
+            });
+            return
+        }
 
-        if (signup.name == '') {
+        if (!evalField('name',signup.name)) {
             setSignup({
                 ...signup,
                 isError: true,
@@ -49,19 +58,65 @@ const Signup = props => {
             return
         }
 
-        if (signup.password.length < 6) {
+        if (!evalField('name',signup.name)) {
             setSignup({
                 ...signup,
                 isError: true,
-                errorMessage: 'Itroduce una contraseña valida'
+                errorMessage: 'Inserte un apellido válido'
             });
             return
         }
 
+        if (signup.password.length >= 8) {
+            if (!evalField('password', signup.password)) {
+                setSignup({
+                    ...signup,
+                    isError: true,
+                    errorMessage: 'Itroduce una contraseña valida'
+                });
+                return
+            }
+        }else{
+            setSignup({
+                ...signup,
+                isError: true,
+                errorMessage: 'La contraseña debe tener al menos 8 caracteres'
+            });
+            return
+        }
+
+        if (!evalField('phone', signup.phone)) {
+                setSignup({
+                    ...signup,
+                    isError: true,
+                    errorMessage: 'Inserte un numero de tlfn valido'
+                });
+                return
+        }
+
+        if (!evalField('address', signup.address)) {
+            setSignup({
+                ...signup,
+                isError: true,
+                message: 'Introduce a valid address'
+            });
+            return;
+        }
+
+        if (!evalField('email', signup.email)) {
+            setSignup({
+                ...signup,
+                isError: true,
+                message: 'Reenter a valid email'
+            });
+            return;
+        }
+
+
         setSignup({
             ...signup,
-            isError: false,
-            errorMessage: ''
+            isError: true,
+            errorMessage: 'Has sido registrado correctamente, inicie sesión para iniciar su compra'
         });
 
         dispatch(signUpUser(signup.email, signup.password, signup.name, signup.last_name, signup.phone));
@@ -100,8 +155,9 @@ const Signup = props => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-                <p>{signup.errorMessage}</p>
+
             </Form>
+            <p>{signup.errorMessage}</p>
         </div>
     )
 }
