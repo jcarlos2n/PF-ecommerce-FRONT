@@ -6,7 +6,6 @@ import { userData } from '../../containers/User/userSlice';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
 const AddressCard = props => {

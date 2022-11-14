@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Profile.scss';
 import AddressCard from "../../../components/AddressCard/AddressCard";
+import UsersCard from "../../../components/UsersCard/UsersCard";
 import Button from 'react-bootstrap/Button';
 
 
@@ -66,7 +67,7 @@ const Profile = () => {
                     }
                     await axios.get('http://localhost:8000/api/user/getusers', config)
                         .then(resp => {
-                            console.log(resp.data.data)
+                            setUsers(resp.data.data)
                         })
                 } catch (error) {
                     console.log(error);
@@ -96,6 +97,34 @@ const Profile = () => {
         navigate('/address')
     }
 
+    const UserList = () => {
+        console.log("Usuarios"+users)
+        if (users.length > 0) {
+            return (
+                <Container fluid>
+                    <Row>
+
+                        {
+                            users.map((add, index) => (
+                                <UsersCard key={index} data={add} />
+                            ))
+                        }
+
+                    </Row>
+                </Container>
+            )
+        } else {
+            return (
+                <Container fluid>
+                    <Row>
+                        <Col>No hay direcciones</Col>
+                    </Row>
+                </Container>
+            )
+
+        }
+    }
+ 
     const AddressList = () => {
 
         if (dataAdd.length > 0) {
@@ -142,6 +171,10 @@ const Profile = () => {
                 <Button variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
 
                 <AddressList />
+
+                <h1>Usuarios</h1>
+
+                <UserList />
             </div>
         )
     } {
