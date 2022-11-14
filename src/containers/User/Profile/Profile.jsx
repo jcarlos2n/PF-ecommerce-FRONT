@@ -18,6 +18,9 @@ const Profile = () => {
     const dataUser = useSelector(userData);
     const [dataAdd, setAddress] = useState([]);
     const [role, setRole] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    
 
     useEffect(() => {
         if (!dataUser?.token) {
@@ -55,11 +58,28 @@ const Profile = () => {
                     console.log(error)
                 }
             }
+
+            async function fetchUsers (){
+                try {
+                    const config = {
+                        headers: { "Authorization": `Bearer ${dataUser.token}` }
+                    }
+                    await axios.get('http://localhost:8000/api/user/getusers', config)
+                        .then(resp => {
+                            console.log(resp.data.data)
+                        })
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
             fetchAddress();
             fetchRole();
+            fetchUsers();  
         }
 
-    }, [])
+    }, []);
+
     const getOut = () => {
 
         dispatch(logout());
@@ -118,10 +138,8 @@ const Profile = () => {
         return (
             <div className="profileWall">
                 <h1>Eres admin</h1>
-                {/* <button  >Log Out</button> */}
                 <Button variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
                 <Button variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
-                {/* <button type="submit" >add address</button> */}
 
                 <AddressList />
             </div>
