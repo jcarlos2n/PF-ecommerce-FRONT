@@ -1,8 +1,9 @@
 
-import './UsersCard.scss';
+
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import './UsersCard.scss';
 
 const UsersCard = props => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const UsersCard = props => {
     })
 
     return (
-        <Card className='userCard' style={{ width: '18rem' }}>
+        <Card style={{ width: '18rem' }} className='userCard'>
             <Card.Body>
                 <Card.Title>Nombre:</Card.Title>
                 <Card.Text>{props.data.name}</Card.Text>

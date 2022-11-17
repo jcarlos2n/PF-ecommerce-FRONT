@@ -21,8 +21,6 @@ const Profile = () => {
     const [role, setRole] = useState([]);
     const [users, setUsers] = useState([]);
 
-
-
     useEffect(() => {
         if (!dataUser?.token) {
             navigate('/');
@@ -42,8 +40,6 @@ const Profile = () => {
                 } catch (error) {
                     console.log(error)
                 }
-
-
             }
 
             async function fetchRole() {
@@ -173,7 +169,6 @@ const Profile = () => {
                     <Button className="button" variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
                     <Button className="button" variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
                 </div>
-
 
                 <AddressList />
 
