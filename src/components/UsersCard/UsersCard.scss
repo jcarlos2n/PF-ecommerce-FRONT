@@ -2,6 +2,15 @@
 
 
 .userCard{
-    min-height: 10em;
-    height: auto;
+    // height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 21em;
+
+    // .bodyCard{
+    //     max-height: auto;
+    //     height: 12em;
+    //     background-color: red;
+    // }
 }

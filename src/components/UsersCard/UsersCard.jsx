@@ -16,7 +16,7 @@ const UsersCard = props => {
 
     return (
         <Card className='userCard' style={{ width: '18rem' }}>
-            <Card.Body>
+            <Card.Body className='bodyCard'>
                 <Card.Title>Nombre:</Card.Title>
                 <Card.Text>{props.data.name}</Card.Text>
                 <Card.Title>Apellido:</Card.Title>
