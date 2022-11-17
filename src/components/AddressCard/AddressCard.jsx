@@ -112,8 +112,8 @@ const AddressCard = props => {
                     <Card.Text>{props.data.state}</Card.Text>
                     <Card.Title>Calle:</Card.Title>
                     <Card.Text>{props.data.street}</Card.Text>
-                    <Button variant="primary" onClick={showUp}>Actualizar</Button>
-                    <Button variant="primary" onClick={deleteAddress}>Eliminar</Button>
+                    <Button className='boton' variant="primary" onClick={showUp}>Actualizar</Button>
+                    <Button className='boton' variant="primary" onClick={deleteAddress}>Eliminar</Button>
                 </Card.Body>
             </Card>
         )
@@ -131,8 +131,8 @@ const AddressCard = props => {
                     <Form.Control onChange={handleInput} type="text" name="state" placeholder={props.data.state} />
                     <Card.Title>Calle:</Card.Title>
                     <Form.Control onChange={handleInput} type="text" name="street" placeholder={props.data.street} />
-                    <Button variant="primary" onClick={addressUpdate()}>Actualizar</Button>
-                    <Button variant="primary" onClick={hideUp}>Cancelar</Button>
+                    <Button className='boton' variant="primary" onClick={addressUpdate()}>Actualizar</Button>
+                    <Button className='boton' variant="primary" onClick={hideUp}>Cancelar</Button>
                 </Card.Body>
             </Card>
         )
