@@ -1,26 +1,53 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   max-width: 99vw
+
+}
 
 .profileWall {
    min-height: 78vh;
+   width: 99vw;
    height: auto;
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
+   padding: 0;
+   margin: 0;
+   background-color: red;
 
    .buttons {
       display: flex;
       flex-direction: row;
 
-      .button{
+      .button {
          margin: 0.5em;
       }
    }
+
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+
 }
 
 .cards {
-   display: flex;
+   // display: flex;
+   flex-wrap: wrap;
+   background-color: blue;
    align-items: center;
    justify-content: center;
+   width: 50em;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.title {
+   margin: 0;
+   padding: 0;
 }

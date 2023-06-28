@@ -97,7 +97,7 @@ const Profile = () => {
 
         if (users.length > 0) {
             return (
-                <Container fluid className="cards">
+                <Container className="cards">
                     <Row>
 
                         {
@@ -111,7 +111,7 @@ const Profile = () => {
             )
         } else {
             return (
-                <Container fluid className="cards">
+                <Container className="cards">
                     <Row>
                         <Col>No hay direcciones</Col>
                     </Row>
@@ -125,7 +125,7 @@ const Profile = () => {
 
         if (dataAdd.length > 0) {
             return (
-                <Container fluid className="cards">
+                <Container className="cards">
                     <Row>
 
                         {
@@ -139,7 +139,7 @@ const Profile = () => {
             )
         } else {
             return (
-                <Container fluid className="cards">
+                <Container className="cards">
                     <Row>
                         <Col>No hay direcciones</Col>
                     </Row>
@@ -164,7 +164,7 @@ const Profile = () => {
 
         return (
             <div className="profileWall">
-                <h1>Eres admin</h1>
+                <h1 className="title">Eres admin</h1>
                 <div className="buttons">
                     <Button className="button" variant="secondary" type="submit" onClick={getOut}>Log Out</Button>{' '}
                     <Button className="button" variant="secondary" type="submit" onClick={address}>Add Address</Button>{' '}
@@ -172,7 +172,7 @@ const Profile = () => {
 
                 <AddressList />
 
-                <h1>Usuarios</h1>
+                <h1 className="title">Usuarios</h1>
 
                 <UserList />
             </div>
